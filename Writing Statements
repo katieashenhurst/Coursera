@@ -1,6 +1,13 @@
 var result = 50;
+
 if (result > 40) {
     console.log("Congratulations you passed.");
 } else {
     console.log("Unfortunately you did not pass.");
+}
+else if (food == "cold") {
+    console.log('Too cold')
+}
+else {
+    console.log('Just Right')
 }
