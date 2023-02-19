@@ -3,3 +3,28 @@ function myFunc() {
 }
 
 myFunc();
+
+
+function addTwoNums() {
+
+    // Code goes here
+}
+
+function addTwoNums() {
+
+var a = 10;
+var b = 20;
+var c = a + b;
+
+console.log(c)
+}
+addTwoNums();
+
+function addTwoNums(a,b) {
+
+var c = a + b;
+
+console.log(c)
+}
+addTwoNums(2,2);
+addTwoNums(4,4);
