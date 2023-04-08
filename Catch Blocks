@@ -1,0 +1,32 @@
+console.log(a+b);
+console.log("This line is never reached");
+
+// throw new ReferenceError();
+// Result will be "ReferenceError: a is not defined"
+
+
+console.log(a+b);
+console.log("This line is never reached");
+
+throw new ReferenceError();
+// Result will be "ReferenceError"
+
+try {
+console.log(a + b)
+} catch(err) {
+console.log(err)
+console.log('There was an error')
+console.log("This line is never reached")
+}
+console.log("My program does not stop")
+// Result will be "ReferenceError: a is not defined"
+
+try {
+    throw new ReferenceError();
+} catch(err) {
+    console.log(err)
+    console.log('There was a Reference Error')
+}
+console.log("My program does not stop")
+// Result will be "ReferenceError", There was a Reference Error
+My program does not stop
