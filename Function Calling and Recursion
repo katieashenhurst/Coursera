@@ -1,0 +1,35 @@
+function example() {
+console.log('line one');
+console.log('line two');
+console.log('line three');
+}
+
+example()
+line one
+line two
+line three
+
+let countr =3;
+function example(){
+console.log(counter);
+counter = counter -1;
+if(counter === 0) return;
+example();
+}
+
+example()
+3
+2
+1
+
+// when a function calls itself it is known as "recursion" which is an alternative way to run code without the use of loops, for example...
+
+function myDay() {
+    console.log('Morning');
+    console.log('Afternoon');
+    console.log('Evening');
+    myDay();
+}
+
+//... will run an infinate loop as there is no condition to stop it
+
