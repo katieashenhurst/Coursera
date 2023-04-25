@@ -1,0 +1,22 @@
+// Scope is JS works similar to a two-way mirror glass - aka if it were a restaurant that used two-way glass for windows, people outside can't see what's happening inside, but people inside can see people outside
+
+
+// The code that exists outside a funtion is known as Global scope, and all the code inside of a funciton is known as Local Scope or Function Scope
+var num1 = 10; // Global Scope
+
+function score() { // Local Scope or Function Scope
+var num2 = 20;
+console.log(num2); // 20
+}
+
+//For example we could define a variable named localVar and place it within a function. I could then say that this variable was scoped to the function in which it was created
+
+var globalVar = "I'm in the global scope";
+
+function scopeTest() {
+
+var localVar = "I'm scoped to the function";
+
+//Variables created within the local scope cannont be read by code at the global scope level. They are accessible only to functions located within the local scope. 
+
+//Each function keeps a reference to its parent scope. This chain of scope references is referred to as "The Scope Chain"
