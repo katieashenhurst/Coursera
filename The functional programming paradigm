@@ -1,0 +1,135 @@
+//There are actually several styles of coding, also known as paradigms. A common style is called "functional programming" or FP for short. 
+//In funcitonal programming, we use a lot of functions and variables 
+
+function getTotal(a,b) {
+    return a + b
+}
+var num1 = 2;
+var num2 = 3;
+
+var total = getTotal(num1, num2);
+
+//When writing FP code, we keep data and functionality separate and pass data into functions only when we want something computed 
+
+function getDistance(mph, h) {
+    return mph * h
+}
+var mph = 60;
+var h = 2;
+var distance = getDistance(mph, h);
+
+//In funcitonal programming, functions return new values and then use those values somewhere else in the code 
+
+function getDistance(mph, h) {
+    return mph * h
+}
+var mph = 60;
+var h = 2;
+var distance = getDistance(mph, h);
+
+console.log(distance); // <====== THIS HERE!
+
+//Another style is Object-Oriented Programming (OOP). In this style, we group data and functionality as properties and methods inside objects. 
+//For example, if have a virtualPet object, I can give it a sleepy property and a nap() method
+
+var virtualPet = {
+    sleepy: true,
+    nap: function() {}
+}
+
+//In OOP, methods update properties stored in the object instead of generating new return values.
+//E.g., if I check the sleepy property on the virtualPet object, I can confirm that it's set to true. 
+//However, once I've ran the nap() method on teh virtualPet object, will the sleep property's value change?
+
+//creating an object
+var virtualPet = {
+    sleepy: true,
+    nap: function() {
+        this.sleepy = false
+    }
+}
+console.log(virtualPet.sleepy) // true
+virtualPet.nap()
+console.log(virtualPet.sleepy) // false
+
+//OOP helps us model real-life objects. It works best when the grouping of properties and data in an object makes logical sense - meaning, the properties and methods "belong together".
+//Note that the goal here is not to discuss OOP in depth; instead just to show the simplest explanation of what it is and how it works to make the single most important distinction between FP and OOP
+//To summarise, we can say that the FP paradigm works by keeping the data and functionality separate. OOP works by keeping the data and functionality grouped in meaningful objects. 
+
+//There are many more concepts and ideas in functional programming:
+// - First-class functions, higher-order function, pure function and side-effects
+//There are many other concepts and principles in functional programming, but for now, let's stick to these three. 
+
+//First-class functions
+//Is is ofter said that functions in JS are "first-class citizens". It means that a function in JS is just another value that we can:
+//- pass to other functions, save in a variable, return from other functions 
+//In other words, a function in JS is just a value, from this vantage point, almost no different than a string or a number 
+// E.g. in JS it is perfectly normal to pass a function invocation to another function. To explain how this works, consider the following program:
+
+function addTwoNums(a, b) {
+    console.log(a + b)
+}
+
+function randomNum() {
+    return Math.floor((Math.random() * 10) + 1);
+}
+function specificNum() { return 42 };
+
+var useRandom = true;
+
+var getNumber;
+
+if(useRandom) {
+    getNumber = randomNum
+} else {
+    getNumber = specificNum
+}
+
+addTwoNums(getNumber(), getNumber())
+
+//I start the program with the addTwoNums() function whose definition I've already used earlier in various variations. The reason why this function is a recurring example is because it's so simple that it helps explain concepts that otherwise might be a bit harder to grasp
+//Next, I code a function named randomNum() which returns a random number between 0 and 10
+//I then code another function named specificNum() which returns a specific number, the number 42
+//Next, I save a variable named useRandom, and I set it to the boolean value of true. I declare another variable, named getNumber. 
+//On the next several lines, I have an if else statement. The if condition is executed when the value of useRandom is set to true. If that's the case, the entire randomNum() function's declaration is saved in to the getNumber variable. Otherwise, I'm saving the entire specificNum() function's declaration into the getNumber variable.
+//Based on the useRandom being set to true or false, the getNumber variable will be assigned either the randomNum() function declaration or the specificNum() function declaration. 
+//With all this code set, I can then invoke the addTwoNums() function, passing it the invocation of the getNumber() variables as its first and second arguments 
+//THIS WORKS BECAUSE FUNCTIONS IN JS ARE TRULY FIRST-CLASS CITIZENS, WHICH CAN BE ASSIGNED TO VARIABLE NAMES AND PASSED ARUOND JUST LIKE I WOULD PASS AROUND A STRING, NUMBER, OBJECT ETC
+
+//This brings us to the second foundational concept of functional programming, which is the concept of higher-order functions
+//HIGHER-ORDER FUNCTIONS
+//A higher-order function is a function that has either one or both of the following characteristics: It accepts other functions as arguments and/or it returns functions when invoked.
+//There's no "special way" of defining higher-order functions in JS. It's simply a feature of the languages. The language itself allows me to pass a function to another function from another function. 
+//Continuing from the previous section, consider the following code, in which I'm re-defining the addTwoNums() function so that is is a higher-order function:
+
+function addTwoNums(getNumber1, getNumber2) {
+    console.log(getNumber1() + getNumber2());
+}
+
+//You can think of the above function declaration of addTwoNums as describing how it will deal with the getNumber1 and getNumber2 inputs: once it receives them as arguments, it will then attempt invoking them and concatenating the values returned from those invocations
+
+addTwoNums(specificNum, specificNum); // returned number is 84
+addTwoNums(specificNum, randomNum); // returned number is 42 + some random number
+
+//PURE FUNCTIONS AND SIDE-EFFECTS
+//Another concept of functional programming are pure functions
+//A pure function returns the exact same result as long as it's given the same values
+//An example of a pure function is the addTwoNums() function from the previous section:
+
+function addTwoNums(a, b) {
+    console.log(a + b)
+}
+
+//This function will always return the same output, based on the input. For example, as long as we give it a specific value, say, a 5 and a 6:
+
+addTwoNums(5,6); // 11
+
+// the output will always be the same. 
+
+//Another rule for a function to be considered pure is that it should not have side-effects. A side-effect is any instance where a function makes a change outside of itself. 
+//This includes:
+//- Changeing variable values outside of the function itself, or even relying on outside variables
+// - Calling a Brower API (even the console itself!)
+//- calling Math.random() - since the value cannot be reliably repeated
+
+//The topic of pure and impure functions can get somewhat complex. For now, it's sufficient to know that this concept exists and that is is related to functional programming. 
